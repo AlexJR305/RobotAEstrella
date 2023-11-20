@@ -95,7 +95,7 @@ namespace RobotIA
             // Puedes ajustar esto según la estructura específica de tu plano
             List<Nodo> vecinos = new List<Nodo>();
 
-            // Ejemplo: Movimientos arriba, abajo, izquierda, derecha
+            // Horizontales
             AgregarVecino(nodo.X, nodo.Y - 1, vecinos);
             AgregarVecino(nodo.X, nodo.Y + 1, vecinos);
             AgregarVecino(nodo.X - 1, nodo.Y, vecinos);
