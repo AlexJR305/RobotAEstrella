@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RobotIA
 {
+    
     public class Nodo
     {
         public int X { get; set; }
@@ -14,6 +15,7 @@ namespace RobotIA
         public int Heuristica { get; set; }
         public Nodo Padre { get; set; }
     }
+    
     public class AEstrella
     {
         private int[,] plano;
@@ -26,9 +28,16 @@ namespace RobotIA
             this.inicio = Inicio;
             this.objetivo= Objetivo;
         }
+        List<Nodo> TodosLosNodos = new List<Nodo>();
 
+        public List<Nodo> TodosLosVecinosEncontrados()
+        {
+            return TodosLosNodos;
+        }
+        
         public List<Nodo> EncontrarCamino(Nodo inicio, Nodo objetivo)
         {
+            
             List<Nodo> listaAbierta = new List<Nodo> { inicio };
             List<Nodo> listaCerrada = new List<Nodo>();
 
@@ -95,17 +104,18 @@ namespace RobotIA
             // Puedes ajustar esto según la estructura específica de tu plano
             List<Nodo> vecinos = new List<Nodo>();
 
-            // Horizontales
+            //Horizontales
             AgregarVecino(nodo.X, nodo.Y - 1, vecinos);
             AgregarVecino(nodo.X, nodo.Y + 1, vecinos);
             AgregarVecino(nodo.X - 1, nodo.Y, vecinos);
             AgregarVecino(nodo.X + 1, nodo.Y, vecinos);
             //Diagonales
+            
             AgregarVecino(nodo.X - 1, nodo.Y - 1, vecinos);
             AgregarVecino(nodo.X + 1, nodo.Y + 1, vecinos);
             AgregarVecino(nodo.X - 1, nodo.Y + 1, vecinos);
             AgregarVecino(nodo.X + 1, nodo.Y - 1, vecinos);
-
+            
             return vecinos;
         }
 
@@ -116,6 +126,7 @@ namespace RobotIA
             {
                 Nodo vecino = new Nodo { X = x, Y = y };
                 vecino.Heuristica = CalcularHeuristica(vecino);
+                TodosLosNodos.Add(vecino);
                 vecinos.Add(vecino);
             }
         }

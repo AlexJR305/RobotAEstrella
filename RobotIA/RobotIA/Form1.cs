@@ -5,13 +5,14 @@ namespace RobotIA
 {
     public partial class Form1 : Form
     {
-        private int[,] plano = new int[1000, 1000];
+        private int[,] plano = new int[50, 50];
         Nodo inicio = new Nodo { X = 0, Y = 0 };
         Nodo objetivo = new Nodo { X = 0, Y = 0 };
         public Form1()
         {
             InitializeComponent();
             crearMapa();
+            
 
         }
         public void crearMapa()
@@ -33,7 +34,7 @@ namespace RobotIA
                     Point loc = new Point();
                     loc.X = i * 34;
                     loc.Y = j * 34;
-                    if (rand.NextDouble() > 0.8)
+                    if (rand.NextDouble() > 0.7)
                     {
                         btn.BackColor = Color.Black;
                         plano[i, j] = 1;
@@ -46,17 +47,22 @@ namespace RobotIA
                     mapa.Controls.Add(btn);
                     btn.Click += Btn_Click;
                 }
+                Console.WriteLine(plano);
+
             }
         }
         private bool b = true;
+
         private void Btn_Click(object sender, EventArgs e)
         {
             Button btnClic = (Button)sender;
-            if (plano[int.Parse(btnClic.Name.Split("_")[1]), int.Parse(btnClic.Name.Split("_")[2])]!=1)
+            if (plano[int.Parse(btnClic.Name.Split("_")[1]), int.Parse(btnClic.Name.Split("_")[2])] != 1)
             {
                 if (b)
                 {
                     btnClic.BackColor = Color.Orange;
+                    btnClic.Text = "S";
+                    btnClic.ForeColor = Color.White;
                     inicio.X = int.Parse(btnClic.Name.ToString().Split("_")[1]);
                     inicio.Y = int.Parse(btnClic.Name.ToString().Split("_")[2]);
                     b = false;
@@ -64,6 +70,8 @@ namespace RobotIA
                 else
                 {
                     btnClic.BackColor = Color.Red;
+                    btnClic.Text = "D";
+                    btnClic.ForeColor = Color.White;
                     objetivo.X = int.Parse(btnClic.Name.ToString().Split("_")[1]);
                     objetivo.Y = int.Parse(btnClic.Name.ToString().Split("_")[2]);
                 }
@@ -85,17 +93,29 @@ namespace RobotIA
 
                 if (camino != null)
                 {
-                    int indice = 0;
+
+                    List<Nodo> vecinos = aEstrella.TodosLosVecinosEncontrados();
+                    foreach (Nodo nodo in vecinos)
+                    {
+                        string nombreVecino = "btn_" + nodo.X + "_" + nodo.Y;
+                        Button boton = this.Controls.Find(nombreVecino, true).FirstOrDefault() as Button;
+                        if (boton != null)
+                        {
+                            boton.BackColor = Color.CadetBlue;
+                        }
+                    }
                     foreach (Nodo nodo in camino)
                     {
                         string nombreBoton = "btn_" + nodo.X + "_" + nodo.Y;
                         Button boton = this.Controls.Find(nombreBoton, true).FirstOrDefault() as Button;
                         if (boton != null)
                         {
-                            boton.BackColor = Color.Green;
-                            Thread.Sleep(1000);
+                            boton.BackColor = Color.Red;
                         }
                     }
+
+
+
                     MessageBox.Show("Camino generado con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
