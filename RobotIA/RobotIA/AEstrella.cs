@@ -14,6 +14,14 @@ namespace RobotIA
         public int CostoActual { get; set; }
         public int Heuristica { get; set; }
         public Nodo Padre { get; set; }
+
+        public string ToString()
+        {
+            return "{" + X + "," + Y + "}";
+        }
+
+
+
     }
     
     public class AEstrella
@@ -100,8 +108,6 @@ namespace RobotIA
 
         private List<Nodo> ObtenerVecinos(Nodo nodo)
         {
-            // Implementar lógica para obtener los vecinos de un nodo en el plano
-            // Puedes ajustar esto según la estructura específica de tu plano
             List<Nodo> vecinos = new List<Nodo>();
 
             //Horizontales
@@ -116,6 +122,7 @@ namespace RobotIA
             AgregarVecino(nodo.X - 1, nodo.Y + 1, vecinos);
             AgregarVecino(nodo.X + 1, nodo.Y - 1, vecinos);
             
+            
             return vecinos;
         }
 
@@ -127,14 +134,51 @@ namespace RobotIA
                 Nodo vecino = new Nodo { X = x, Y = y };
                 vecino.Heuristica = CalcularHeuristica(vecino);
                 TodosLosNodos.Add(vecino);
+                vecino.ToString();
                 vecinos.Add(vecino);
             }
         }
 
         private int CalcularCosto(Nodo origen, Nodo destino)
         {
-            // Puedes ajustar la lógica de cálculo de costo según tus necesidades
-            return 1;
+            // Distancia Euclidiana ponderada
+            double distancia = Math.Sqrt(Math.Pow(destino.X - origen.X, 2) + Math.Pow(destino.Y - origen.Y, 2));
+
+            int factorDeObstaculo = 0;
+
+            if (HayObstaculoEnElCamino(origen, destino))
+            {
+                factorDeObstaculo = 3;
+            }
+
+            return (int)(distancia * factorDeObstaculo);
+        }
+
+        private bool HayObstaculoEnElCamino(Nodo origen, Nodo destino)
+        {
+
+            int x = origen.X;
+            int y = origen.Y;
+
+            while (x != destino.X || y != destino.Y)
+            {
+                if (plano[x, y] == 1)
+                {
+                    return true;
+                }
+
+                if (x < destino.X)
+                    x++;
+                else if (x > destino.X)
+                    x--;
+
+                if (y < destino.Y)
+                    y++;
+                else if (y > destino.Y)
+                    y--;
+            }
+
+            return false;
         }
 
         private void ActualizarCostoYPadre(Nodo nodo, int nuevoCosto, Nodo nuevoPadre)

@@ -32,56 +32,64 @@
             menuStrip1 = new MenuStrip();
             comenzarToolStripMenuItem = new ToolStripMenuItem();
             reiniciarToolStripMenuItem = new ToolStripMenuItem();
-            toolStripComboBox1 = new ToolStripComboBox();
+            mapaSiguienteToolStripMenuItem = new ToolStripMenuItem();
+            mapaNteriorToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // mapa
             // 
             mapa.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            mapa.Location = new Point(0, 30);
+            mapa.Location = new Point(12, 30);
             mapa.Name = "mapa";
-            mapa.Size = new Size(852, 853);
+            mapa.Size = new Size(858, 861);
             mapa.TabIndex = 0;
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { comenzarToolStripMenuItem, reiniciarToolStripMenuItem, toolStripComboBox1 });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { comenzarToolStripMenuItem, reiniciarToolStripMenuItem, mapaSiguienteToolStripMenuItem, mapaNteriorToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(852, 32);
+            menuStrip1.Size = new Size(882, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
             // comenzarToolStripMenuItem
             // 
             comenzarToolStripMenuItem.Name = "comenzarToolStripMenuItem";
-            comenzarToolStripMenuItem.Size = new Size(90, 28);
+            comenzarToolStripMenuItem.Size = new Size(90, 24);
             comenzarToolStripMenuItem.Text = "Comenzar";
             comenzarToolStripMenuItem.Click += comenzarToolStripMenuItem_Click;
             // 
             // reiniciarToolStripMenuItem
             // 
             reiniciarToolStripMenuItem.Name = "reiniciarToolStripMenuItem";
-            reiniciarToolStripMenuItem.Size = new Size(80, 28);
+            reiniciarToolStripMenuItem.Size = new Size(80, 24);
             reiniciarToolStripMenuItem.Text = "Reiniciar";
             reiniciarToolStripMenuItem.Click += reiniciarToolStripMenuItem_Click;
             // 
-            // toolStripComboBox1
+            // mapaSiguienteToolStripMenuItem
             // 
-            toolStripComboBox1.Alignment = ToolStripItemAlignment.Right;
-            toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            toolStripComboBox1.Items.AddRange(new object[] { "Mapa 1", "Mapa 2", "Mapa 3", "Mapa 4", "Mapa 5", "Mapa 6", "Mapa 7", "Mapa 8", "Mapa 9", "Mapa 10" });
-            toolStripComboBox1.Name = "toolStripComboBox1";
-            toolStripComboBox1.Size = new Size(300, 28);
-            toolStripComboBox1.Tag = "Seleccione un Mapa";
+            mapaSiguienteToolStripMenuItem.Alignment = ToolStripItemAlignment.Right;
+            mapaSiguienteToolStripMenuItem.Name = "mapaSiguienteToolStripMenuItem";
+            mapaSiguienteToolStripMenuItem.Size = new Size(127, 24);
+            mapaSiguienteToolStripMenuItem.Text = "Mapa Siguiente";
+            mapaSiguienteToolStripMenuItem.Click += mapaSiguienteToolStripMenuItem_Click;
+            // 
+            // mapaNteriorToolStripMenuItem
+            // 
+            mapaNteriorToolStripMenuItem.Alignment = ToolStripItemAlignment.Right;
+            mapaNteriorToolStripMenuItem.Name = "mapaNteriorToolStripMenuItem";
+            mapaNteriorToolStripMenuItem.Size = new Size(119, 24);
+            mapaNteriorToolStripMenuItem.Text = "Mapa Anterior";
+            mapaNteriorToolStripMenuItem.Click += mapaNteriorToolStripMenuItem_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(852, 883);
+            ClientSize = new Size(882, 903);
             Controls.Add(mapa);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -100,6 +108,7 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem comenzarToolStripMenuItem;
         private ToolStripMenuItem reiniciarToolStripMenuItem;
-        private ToolStripComboBox toolStripComboBox1;
+        private ToolStripMenuItem mapaNteriorToolStripMenuItem;
+        private ToolStripMenuItem mapaSiguienteToolStripMenuItem;
     }
 }
